@@ -69,7 +69,7 @@ pub fn parse(tokens: Vec<Token>) -> Result<Vec<Instruction>, ParserError> {
         Keyword::Print => {
           let value_tokens = parse_brackets(&mut tokens)?;
           let value = parse_value(value_tokens)?;
-          Some(Instruction::Print { value })
+          Some(Instruction::Print { message: value })
         }
         Keyword::Input => {
           if let Some(Token::Identifier(variable)) = tokens.next() {
@@ -264,7 +264,7 @@ pub enum Instruction {
   },
   Break,
   Print {
-    value: Value,
+    message: Value,
   },
   Input {
     variable: String,
